@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Black Lion Command Center</title>
+<style>
+body {margin:0;font-family:'Courier New', monospace;background:#0b0c10;color:#00ffcc;}
+h1{text-align:center;margin:20px;color:#00ffcc;text-shadow:0 0 10px #00ffcc;}
+.container{max-width:900px;margin:20px auto;padding:20px;background:rgba(11,12,16,0.95);border-radius:15px;box-shadow:0 0 25px #00ffcc;}
+label{display:block;margin:10px 0 5px;font-weight:bold;}
+.checkbox-group{margin-bottom:15px;}
+.checkbox-group label{font-weight:normal;margin-left:8px;}
+.wa-btn{background:#25D366;color:#0b0c10;text-align:center;padding:15px;margin-top:10px;border-radius:10px;font-weight:bold;font-size:18px;text-decoration:none;display:block;text-shadow:0 0 5px #0b0c10;}
+.wa-btn:hover{background:#1ebe57;}
+</style>
+</head>
+<body>
+
+<h1>Black Lion Daily Tasks</h1>
+
+<div class="container">
+<label>Full Name</label>
+<input id="name" placeholder="Your full name">
+
+<label>Student ID / Phone</label>
+<input id="id" placeholder="Your ID or phone">
+
+<div class="checkbox-group">
+<h3>1️⃣ Physical Training (30+ mins)</h3>
+<input type="checkbox" id="task1_done"> <label for="task1_done">Completed</label>
+<input type="text" id="task1_note" placeholder="Optional note">
+</div>
+
+<div class="checkbox-group">
+<h3>2️⃣ Mind Discipline</h3>
+<input type="checkbox" id="task2_done"> <label for="task2_done">Eye Gazing + Affirmation done</label>
+<input type="text" id="task2_note" placeholder="Optional note">
+</div>
+
+<div class="checkbox-group">
+<h3>3️⃣ Breath Ritual</h3>
+<input type="checkbox" id="task3_done"> <label for="task3_done">10 deep breaths with visualization</label>
+<input type="text" id="task3_note" placeholder="Optional note">
+</div>
+
+<div class="checkbox-group">
+<h3>4️⃣ Aura Protection</h3>
+<input type="checkbox" id="task4_done"> <label for="task4_done">Mantra completed</label>
+<input type="text" id="task4_note" placeholder="Optional note">
+</div>
+
+<div class="checkbox-group">
+<h3>5️⃣ Midnight Reflection</h3>
+<input type="checkbox" id="task5_done"> <label for="task5_done">Reflection done</label>
+<input type="text" id="task5_note" placeholder="Optional note">
+</div>
+
+<div class="checkbox-group">
+<h3>6️⃣ Mental Fuel (10+ mins)</h3>
+<input type="checkbox" id="task6_done"> <label for="task6_done">Read / Watch activity done</label>
+<input type="text" id="task6_note" placeholder="Optional note">
+</div>
+
+<a href="#" id="waLink" class="wa-btn">Send Report to WhatsApp</a>
+</div>
+
+<script>
+const waBtn = document.getElementById("waLink");
+const WA_GROUP_LINK = "https://chat.whatsapp.com/JcU2LJ93jK38jKlGFM5BC6?mode=wwt";
+
+function updateWhatsAppLink(){
+    const name = document.getElementById("name").value || "N/A";
+    const id = document.getElementById("id").value || "N/A";
+    
+    const msg = `
+Black Lion Daily Report
+Name: ${name}
+ID: ${id}
+
+1️⃣ Physical Training: ${document.getElementById("task1_done").checked ? "✅" : "❌"} ${document.getElementById("task1_note").value || ""}
+2️⃣ Mind Discipline: ${document.getElementById("task2_done").checked ? "✅" : "❌"} ${document.getElementById("task2_note").value || ""}
+3️⃣ Breath Ritual: ${document.getElementById("task3_done").checked ? "✅" : "❌"} ${document.getElementById("task3_note").value || ""}
+4️⃣ Aura Protection: ${document.getElementById("task4_done").checked ? "✅" : "❌"} ${document.getElementById("task4_note").value || ""}
+5️⃣ Midnight Reflection: ${document.getElementById("task5_done").checked ? "✅" : "❌"} ${document.getElementById("task5_note").value || ""}
+6️⃣ Mental Fuel: ${document.getElementById("task6_done").checked ? "✅" : "❌"} ${document.getElementById("task6_note").value || ""}
+    `;
+    
+    const encoded = encodeURIComponent(msg);
+    waBtn.href = `https://wa.me/?text=${encoded}`;
+}
+
+// Update link dynamically
+document.querySelectorAll("input").forEach(el=>{
+    el.addEventListener("input", updateWhatsAppLink);
+    el.addEventListener("change", updateWhatsAppLink);
+});
+
+// Initialize
+updateWhatsAppLink();
+</script>
+
+</body>
+</html>
